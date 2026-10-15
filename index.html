@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Free browser-based QA testing tools: test case generator, bug report builder, JSON formatter, test data generator, and API test checklist.">
+<title>TestBench — Free QA Testing Toolkit</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a2d;--panel2:#172239;--line:#283550;--text:#edf2ff;--muted:#9aa9c5;--accent:#7c9cff;--accent2:#6ee7c2;--danger:#ff7c91;--radius:18px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#182747 0,transparent 36%),var(--bg);color:var(--text);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.wrap{max-width:1180px;margin:auto;padding:0 22px}
+header{border-bottom:1px solid #ffffff12;background:#0b1020dd;position:sticky;top:0;z-index:5;backdrop-filter:blur(16px)}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.4px;font-size:19px}.logo{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),#8e7bff);color:#091020;font-weight:900}.navlinks{display:flex;gap:18px;align-items:center}.navlinks a{color:var(--muted);text-decoration:none;font-size:13px}.navlinks a:hover{color:white}.pill{border:1px solid #6ee7c255;background:#6ee7c210;color:var(--accent2);padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700}
+.hero{padding:64px 0 35px;display:grid;grid-template-columns:1.3fr .7fr;gap:35px;align-items:center}.eyebrow{color:var(--accent2);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800}.hero h1{font-size:clamp(38px,5vw,62px);line-height:1.04;letter-spacing:-2.6px;margin:14px 0 18px;max-width:700px}.gradient{background:linear-gradient(90deg,#a8bbff,#6ee7c2);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{color:var(--muted);font-size:17px;max-width:650px;margin:0 0 23px}.actions{display:flex;flex-wrap:wrap;gap:10px}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:10px 15px;border-radius:11px;font-weight:700}.btn.primary{background:var(--accent);border-color:var(--accent);color:#081020}.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.hero-card{background:linear-gradient(145deg,#172441,#101729);border:1px solid var(--line);border-radius:24px;padding:23px;box-shadow:0 25px 70px #0003}.mini-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.dot{width:8px;height:8px;background:var(--accent2);display:inline-block;border-radius:50%;margin-right:7px}.metric{font-size:34px;font-weight:800;letter-spacing:-1px}.muted{color:var(--muted)}.mini-list{display:grid;gap:10px}.mini-row{display:flex;align-items:center;gap:10px;background:#ffffff06;padding:10px 12px;border-radius:11px;font-size:13px}.check{color:var(--accent2);font-weight:900}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:28px 0 18px}.section-head h2{margin:0;font-size:25px;letter-spacing:-.7px}.section-head p{margin:4px 0 0;color:var(--muted);font-size:14px}.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:28px}.tool-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:19px;text-align:left;color:inherit;transition:.18s}.tool-card:hover,.tool-card.active{border-color:#829dff;transform:translateY(-2px);background:#17233b}.tool-icon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:#7c9cff1b;color:#aabaff;font-size:21px;margin-bottom:13px}.tool-card h3{font-size:16px;margin:0 0 5px}.tool-card p{font-size:13px;color:var(--muted);margin:0}.tag{display:inline-block;margin-top:13px;border-radius:7px;padding:4px 7px;font-size:11px;background:#ffffff0b;color:#c5d0e7}
+.workspace{background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden;margin-bottom:45px}.workspace-head{padding:20px 23px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:15px}.workspace-head h2{font-size:20px;margin:0}.workspace-head p{color:var(--muted);font-size:13px;margin:3px 0 0}.local-badge{color:var(--accent2);font-size:12px;white-space:nowrap}.workspace-body{padding:23px;display:grid;grid-template-columns:1fr 1fr;gap:22px}.field{display:grid;gap:6px;margin-bottom:14px}.field label{font-size:13px;font-weight:700;color:#cbd6ed}.field input,.field textarea,.field select{width:100%;background:#0b1222;color:var(--text);border:1px solid #34425e;border-radius:10px;padding:10px 11px;outline:none}.field textarea{min-height:100px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}.field small{color:var(--muted);font-size:11px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.output{background:#0b1222;border:1px solid #2a3852;border-radius:13px;min-height:260px;padding:15px;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;color:#d4def3}.output.empty{display:grid;place-items:center;text-align:center;color:#71809e;font-family:inherit}.output-tools{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:9px}.output-tools strong{font-size:13px}.status{font-size:12px;color:var(--accent2)}.hint{background:#7c9cff10;border:1px solid #7c9cff25;border-radius:11px;padding:11px 13px;color:#b9c8e9;font-size:12px;margin-top:12px}.footer{border-top:1px solid #ffffff12;padding:25px 0 35px;color:var(--muted);font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.toast{position:fixed;right:20px;bottom:20px;background:#e7fff7;color:#09271e;padding:12px 16px;border-radius:12px;box-shadow:0 8px 30px #0005;display:none;z-index:10;font-weight:700;font-size:13px}
+@media(max-width:850px){.hero{grid-template-columns:1fr;padding-top:44px}.hero-card{max-width:550px}.tool-grid{grid-template-columns:repeat(2,1fr)}.workspace-body{grid-template-columns:1fr}.navlinks a{display:none}}
+@media(max-width:540px){.wrap{padding:0 14px}.tool-grid{grid-template-columns:1fr 1fr;gap:9px}.tool-card{padding:13px}.tool-card p{font-size:12px}.tool-card h3{font-size:14px}.tool-icon{width:36px;height:36px}.hero h1{letter-spacing:-1.7px}.workspace-head,.workspace-body{padding:16px}.two{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}.metric{font-size:29px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="brand"><div class="logo">T</div> TestBench <span class="pill">FREE QA TOOLS</span></div>
+  <nav class="navlinks"><a href="#tools">Tools</a><a href="#workspace">Workspace</a><a href="#about">About</a></nav>
+</div></header>
+<main class="wrap">
+<section class="hero">
+  <div><div class="eyebrow">A practical toolkit for testers</div>
+    <h1>Test smarter.<br><span class="gradient">Ship with confidence.</span></h1>
+    <p>Handy QA utilities for test cases, bug reports, test data and API responses. Free to use, no account required, and your inputs stay in your browser.</p>
+    <div class="actions"><button class="btn primary" onclick="document.querySelector('#tools').scrollIntoView({behavior:'smooth'})">Explore tools ↘</button><button class="btn" onclick="loadExample()">Load a sample</button></div>
+  </div>
+  <div class="hero-card"><div class="mini-top"><span class="muted">YOUR QA WORKSPACE</span><span class="pill">BROWSER-ONLY</span></div>
+    <div class="metric">5 <span class="muted" style="font-size:16px;font-weight:500">useful tools</span></div><p class="muted" style="font-size:13px;margin:3px 0 20px">Designed for everyday testing tasks</p>
+    <div class="mini-list"><div class="mini-row"><span class="check">✓</span> Test case generator</div><div class="mini-row"><span class="check">✓</span> Bug report builder</div><div class="mini-row"><span class="check">✓</span> JSON formatter & validator</div><div class="mini-row"><span class="check">✓</span> Safe test data generator</div><div class="mini-row"><span class="check">✓</span> API test checklist</div></div>
+  </div>
+</section>
+<section id="tools">
+  <div class="section-head"><div><h2>Pick a tool</h2><p>Choose a utility to open it in the workspace below.</p></div><span class="muted" style="font-size:12px">5 tools · No sign-up</span></div>
+  <div class="tool-grid">
+    <button class="tool-card active" data-tool="testcase" onclick="selectTool('testcase')"><div class="tool-icon">☷</div><h3>Test Case Generator</h3><p>Create structured manual test cases from a feature description.</p><span class="tag">Test planning</span></button>
+    <button class="tool-card" data-tool="bug" onclick="selectTool('bug')"><div class="tool-icon">⚑</div><h3>Bug Report Builder</h3><p>Turn issue details into a clear, reproducible bug report.</p><span class="tag">Defect reporting</span></button>
+    <button class="tool-card" data-tool="json" onclick="selectTool('json')"><div class="tool-icon">{ }</div><h3>JSON Formatter</h3><p>Validate, pretty-print or minify JSON right in your browser.</p><span class="tag">API testing</span></button>
+    <button class="tool-card" data-tool="data" onclick="selectTool('data')"><div class="tool-icon">▦</div><h3>Test Data Generator</h3><p>Generate synthetic names, emails, IDs and statuses for testing.</p><span class="tag">Synthetic data</span></button>
+    <button class="tool-card" data-tool="api" onclick="selectTool('api')"><div class="tool-icon">⇄</div><h3>API Test Checklist</h3><p>Build a reusable checklist for validating an API endpoint.</p><span class="tag">API QA</span></button>
+    <button class="tool-card" data-tool="about" onclick="selectTool('about')"><div class="tool-icon">ⓘ</div><h3>How to use</h3><p>Tips for getting more consistent results from the toolkit.</p><span class="tag">Quick guide</span></button>
+  </div>
+</section>
+<section id="workspace" class="workspace">
+  <div class="workspace-head"><div><h2 id="workspaceTitle">Test Case Generator</h2><p id="workspaceDesc">Create a useful starting point for manual test execution.</p></div><span class="local-badge">● Runs locally in your browser</span></div>
+  <div class="workspace-body">
+    <div id="formArea"></div>
+    <div><div class="output-tools"><strong>Generated output</strong><div style="display:flex;gap:7px"><button class="btn" style="padding:7px 10px;font-size:12px" onclick="copyOutput()">Copy</button><button class="btn" style="padding:7px 10px;font-size:12px" onclick="downloadOutput()">Download .txt</button></div></div><div id="output" class="output empty">Your generated content will appear here.<br>Choose a tool and fill in the fields.</div><div id="hint" class="hint">Privacy note: this toolkit processes input locally. Do not use real passwords, access tokens, customer records or other sensitive production data in test examples.</div></div>
+  </div>
+</section>
+<section id="about" style="margin-bottom:40px"><div class="section-head"><div><h2>Built for practical QA work</h2><p>Lightweight helpers for manual testers, automation engineers and students.</p></div></div><div class="hint">This is a community-style utility toolkit, not a test management system. Generated cases and checklists are suggestions; review them against your requirements. The tools do not connect to your application, execute API calls or certify that a system is secure.</div></section>
+</main>
+<footer class="footer"><div class="wrap footer-inner"><span>© <span id="year"></span> TestBench · Free QA Testing Toolkit</span><span>Static website · No account · No backend required</span></div></footer>
+<div class="toast" id="toast">Copied to clipboard</div>
+<script>
+const toolMeta={
+ testcase:{title:"Test Case Generator",desc:"Create a useful starting point for manual test execution."},
+ bug:{title:"Bug Report Builder",desc:"Capture the details another tester or developer needs to reproduce an issue."},
+ json:{title:"JSON Formatter & Validator",desc:"Check syntax and format JSON without sending it to a server."},
+ data:{title:"Synthetic Test Data Generator",desc:"Create fake data for test environments. Never use it as real identity data."},
+ api:{title:"API Test Checklist",desc:"Generate a reusable checklist for an endpoint or API feature."},
+ about:{title:"Quick guide",desc:"A few practical notes for using TestBench effectively."}
+};
+let currentTool="testcase",currentOutput="";
+const $=id=>document.getElementById(id);
+function field(label,id,placeholder="",type="text",value=""){return `<div class="field"><label for="${id}">${label}</label><input id="${id}" type="${type}" placeholder="${placeholder}" value="${value.replace(/"/g,'&quot;')}"></div>`}
+function area(label,id,placeholder="",value="",rows=5){return `<div class="field"><label for="${id}">${label}</label><textarea id="${id}" rows="${rows}" placeholder="${placeholder}">${value}</textarea></div>`}
+function selectField(label,id,options){return `<div class="field"><label for="${id}">${label}</label><select id="${id}">${options.map(o=>`<option>${o}</option>`).join("")}</select></div>`}
+function get(id){return ($(id)?.value||"").trim()}
+function selectTool(tool){
+ currentTool=tool;document.querySelectorAll(".tool-card").forEach(c=>c.classList.toggle("active",c.dataset.tool===tool));
+ $("workspaceTitle").textContent=toolMeta[tool].title;$("workspaceDesc").textContent=toolMeta[tool].desc;
+ $("output").className="output empty";$("output").innerHTML="Your generated content will appear here.";currentOutput="";
+ const forms={
+ testcase: `${field("Feature or requirement","feature","e.g. User login")}${area("Requirement details","req","Describe expected behaviour and rules...","")}${selectField("Test type","testType",["Functional","Negative","Boundary","Usability","Regression","Accessibility"])}<div class="two">${selectField("Priority","priority",["High","Medium","Low"])}${selectField("Platform","platform",["Web","Mobile","API","Desktop"])}</div><button class="btn primary" onclick="generateTestCases()">Generate test cases</button>`,
+ bug: `${field("Bug title","bugTitle","e.g. Login button stays disabled")}${selectField("Severity","severity",["S2 - Major","S1 - Critical","S3 - Minor","S4 - Trivial"])}${selectField("Priority","bugPriority",["P1 - High","P2 - Medium","P3 - Low"])}${field("Environment","environment","Browser, OS, build/version")}${area("Steps to reproduce","steps","1. Open the page\\n2. Enter test details\\n3. Click Submit","",4)}${area("Expected result","expected","What should happen?")}${area("Actual result","actual","What actually happened?")}${field("Evidence / reference","evidence","Screenshot filename or issue link (optional)")}<button class="btn primary" onclick="generateBug()">Build bug report</button>`,
+ json: `${area("Paste JSON","jsonInput",'{"status":"ok","items":[1,2,3]}',"",11)}<div class="actions"><button class="btn primary" onclick="formatJSON()">Validate & format</button><button class="btn" onclick="minifyJSON()">Minify</button><button class="btn" onclick="sampleJSON()">Load example</button></div><div class="hint">Your JSON is processed locally in this browser. Avoid pasting production secrets or personal data.</div>`,
+ data: `${selectField("Data type","dataType",["Mixed user records","Email addresses","Names","Numeric IDs","Statuses"])}<div class="two">${field("Number of records","dataCount","10","number","10")}${field("ID prefix (for IDs)","idPrefix","TEST","text","TEST")}</div>${selectField("Output format","dataFormat",["CSV","JSON","Plain text"])}<button class="btn primary" onclick="generateData()">Generate synthetic data</button><div class="hint">All values are synthetic placeholders. Generated emails use example.test and are not intended for delivery.</div>`,
+ api: `${field("API name / endpoint","apiName","e.g. GET /api/v1/users")}${selectField("Method","method",["GET","POST","PUT","PATCH","DELETE"])}${field("Expected status code","statusCode","e.g. 200","text","200")}${area("Request / feature notes","apiNotes","Auth requirements, payload shape, business rules...","",4)}<button class="btn primary" onclick="generateAPI()">Generate checklist</button>`,
+ about: `<h3 style="margin-top:0">How to use TestBench</h3><p class="muted">1. Select a tool above.<br>2. Enter non-sensitive example details.<br>3. Generate, review and edit the output.<br>4. Copy it or download a text file for your test documentation.</p><p class="muted">Tip: use the JSON formatter to validate API response examples, then use the API checklist to plan status-code, schema, negative and boundary tests.</p><button class="btn primary" onclick="selectTool('testcase')">Start with test cases</button>`
+ };
+ $("formArea").innerHTML=forms[tool];if(tool==="json")sampleJSON(false);
+}
+function showOutput(text){currentOutput=text;$("output").className="output";$("output").textContent=text}
+function generateTestCases(){
+ const f=get("feature")||"Unnamed feature",req=get("req")||"Confirm the feature behaves according to the documented requirements.",type=get("testType"),priority=get("priority"),platform=get("platform");
+ const cases=[
+ ["TC-01","Verify valid / expected behaviour",`Execute the primary user flow for: ${f}.`, "The operation completes successfully and the expected result is displayed."],
+ ["TC-02","Verify required fields",`Leave each required field empty while testing ${f}, then submit.`, "Validation is shown and invalid submission is prevented."],
+ ["TC-03","Verify invalid input",`Enter invalid or incorrectly formatted values for ${f}, then submit.`, "Clear validation is displayed; the application remains stable."],
+ ["TC-04","Verify boundary values",`Test minimum, maximum, empty, and just-outside-boundary values applicable to ${f}.`, "Boundary rules are enforced consistently."],
+ ["TC-05","Verify repeated submission",`Submit ${f} more than once or rapidly repeat the action.`, "No duplicate or unintended operation occurs."],
+ ["TC-06","Verify error handling",`Simulate a relevant failure, unavailable dependency, or interrupted connection during ${f}.`, "A helpful error is shown and the application recovers safely."],
+ ["TC-07","Verify permissions",`Attempt ${f} with an unauthorised or insufficiently privileged test account.`, "Access is denied or limited according to the permission rules."],
+ ["TC-08","Verify persistence",`Complete ${f}, navigate away or refresh, and check the resulting state.`, "Data and state persist or reset according to requirements."]
+ ];
+ let out=`TEST CASES — ${f}\nRequirement / context: ${req}\nType: ${type} | Priority: ${priority} | Platform: ${platform}\nGenerated: ${new Date().toLocaleDateString()}\n${"=".repeat(58)}\n`;
+ cases.forEach(c=>{out+=`\n${c[0]} — ${c[1]}\nPreconditions: Test environment is available; use approved synthetic test data.\nSteps:\n1. Navigate to the relevant ${platform.toLowerCase()} feature.\n2. ${c[2]}\n3. Observe the result and record evidence.\nExpected result: ${c[3]}\nActual result: [Fill during execution]\nStatus: Not run\nPriority: ${priority}\n`});
+ out+="\nReview these suggestions and tailor them to the acceptance criteria before execution.\n";showOutput(out);
+}
+function generateBug(){
+ const fields=[["Title",get("bugTitle")],["Severity",get("severity")],["Priority",get("bugPriority")],["Environment",get("environment")],["Steps to reproduce",get("steps")],["Expected result",get("expected")],["Actual result",get("actual")],["Evidence / reference",get("evidence")]];
+ showOutput("BUG REPORT\n"+"=".repeat(48)+"\n"+fields.map(([k,v])=>`${k}:\n${v||"[Not provided]"}\n`).join("\n")+"\nReproducibility: [Always / Sometimes / Once]\nWorkaround: [If known]\nReporter: [Name or team]\n");
+}
+function formatJSON(){try{const obj=JSON.parse(get("jsonInput"));showOutput(JSON.stringify(obj,null,2)+"\n\n✓ Valid JSON");}catch(e){showOutput("INVALID JSON\n"+e.message+"\n\nCheck for missing commas, unmatched braces, or strings that need double quotes.");}}
+function minifyJSON(){try{showOutput(JSON.stringify(JSON.parse(get("jsonInput"))));}catch(e){showOutput("INVALID JSON\n"+e.message);}}
+function sampleJSON(){if($("jsonInput"))$("jsonInput").value=JSON.stringify({status:"ok",data:[{id:101,name:"Sample User",active:true},{id:102,name:"Demo User",active:false}],meta:{page:1,total:2}},null,2);if(arguments.length===0)formatJSON();}
+function generateData(){
+ let n=Math.max(1,Math.min(500,parseInt(get("dataCount"),10)||10)),type=get("dataType"),fmt=get("dataFormat"),prefix=(get("idPrefix")||"TEST").replace(/[^a-z0-9_-]/gi,"").slice(0,12)||"TEST";
+ const first=["Alex","Sam","Jordan","Taylor","Casey","Riley","Morgan","Jamie","Avery","Robin"],last=["Patel","Shah","Singh","Khan","Rao","Mehta","Das","Joshi","Roy","Nair"],statuses=["New","In Progress","Passed","Failed","Blocked"];
+ let rows=[];
+ for(let i=0;i<n;i++){
+  if(type==="Email addresses")rows.push({email:`user${String(i+1).padStart(3,"0")}@example.test`});
+  else if(type==="Names")rows.push({name:first[i%first.length]+" "+last[(i*3)%last.length]});
+  else if(type==="Numeric IDs")rows.push({id:`${prefix}-${String(i+1).padStart(5,"0")}`});
+  else if(type==="Statuses")rows.push({id:i+1,status:statuses[i%statuses.length]});
+  else rows.push({id:`${prefix}-${String(i+1).padStart(4,"0")}`,name:first[i%first.length]+" "+last[(i*3)%last.length],email:`user${String(i+1).padStart(3,"0")}@example.test`,status:statuses[i%statuses.length]});
+ }
+ let out;if(fmt==="JSON")out=JSON.stringify(rows,null,2);else if(fmt==="Plain text")out=rows.map(r=>Object.values(r).join(" | ")).join("\n");else{let keys=[...new Set(rows.flatMap(Object.keys))];out=keys.join(",")+"\n"+rows.map(r=>keys.map(k=>String(r[k]??"")).join(",")).join("\n");}
+ showOutput(out);
+}
+function generateAPI(){
+ const name=get("apiName")||"[Endpoint]",method=get("method"),status=get("statusCode")||"200",notes=get("apiNotes")||"Review API specification and acceptance criteria.";
+ const items=[
+ `API: ${method} ${name}`,`Expected success status: ${status}`,`Notes: ${notes}`,"","API TEST CHECKLIST","=".repeat(45),
+ "[ ] Verify the expected successful response and status code.",
+ "[ ] Verify response headers and content type.",
+ "[ ] Validate response body schema, required fields, data types and formats.",
+ "[ ] Verify response values against the test data and business rules.",
+ "[ ] Test missing, invalid, malformed and unexpected input.",
+ "[ ] Test boundary values, empty values, and large permitted payloads.",
+ "[ ] Verify unauthenticated requests and expired/invalid credentials where applicable.",
+ "[ ] Verify role and permission enforcement without exposing restricted data.",
+ "[ ] Verify not-found, conflict, rate-limit and server-error responses as applicable.",
+ "[ ] Verify pagination, filtering, sorting and defaults if supported.",
+ "[ ] Check duplicate requests and idempotency for applicable operations.",
+ "[ ] Verify errors do not leak secrets, stack traces or sensitive internal details.",
+ "[ ] Check response time against the documented performance target.",
+ "[ ] Confirm logs and monitoring capture useful diagnostics without secrets.",
+ "[ ] Record actual result, evidence, build, environment and test data."
+ ];
+ showOutput(items.join("\n"));
+}
+async function copyOutput(){if(!currentOutput){toast("Generate some output first");return}try{await navigator.clipboard.writeText(currentOutput);toast("Copied to clipboard")}catch(e){const t=document.createElement("textarea");t.value=currentOutput;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();toast("Copied to clipboard")}}
+function downloadOutput(){if(!currentOutput){toast("Generate some output first");return}const blob=new Blob([currentOutput],{type:"text/plain;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=`testbench-${currentTool}-${new Date().toISOString().slice(0,10)}.txt`;a.click();URL.revokeObjectURL(url)}
+function toast(msg){$("toast").textContent=msg;$("toast").style.display="block";setTimeout(()=>$("toast").style.display="none",2200)}
+function loadExample(){selectTool("testcase");$("feature").value="User login";$("req").value="Users can sign in using a valid email and password. Empty fields must show validation. Invalid credentials must show a generic error.";generateTestCases();$("workspace").scrollIntoView({behavior:"smooth"})}
+$("year").textContent=new Date().getFullYear();selectTool("testcase");
+</script>
+</body>
+</html>
